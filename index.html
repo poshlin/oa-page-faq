@@ -399,6 +399,130 @@
     }
     .hero-desc strong { color: var(--text); font-weight: 700; }
 
+    /* ══ Hero 飄浮裝飾元素 ══ */
+    .hero-deco {
+      position: absolute;
+      pointer-events: none;
+      z-index: 0;
+    }
+    .hero-deco-1 { top: 90px;   left: 5%;  animation: float-a 7s ease-in-out infinite; }
+    .hero-deco-2 { top: 70px;   right: 7%; animation: float-b 8s ease-in-out infinite; }
+    .hero-deco-3 { top: 38%;    left: 3%;  animation: float-c 9s ease-in-out infinite; }
+    .hero-deco-4 { top: 32%;    right: 4%; animation: float-a 8.5s ease-in-out infinite reverse; }
+    .hero-deco-5 { bottom: 100px; left: 9%;  animation: float-b 7.5s ease-in-out infinite; }
+    .hero-deco-6 { bottom: 80px;  right: 11%; animation: float-c 6.5s ease-in-out infinite reverse; }
+
+    @keyframes float-a {
+      0%, 100% { transform: translate(0, 0) rotate(0deg); }
+      50% { transform: translate(10px, -14px) rotate(12deg); }
+    }
+    @keyframes float-b {
+      0%, 100% { transform: translate(0, 0) rotate(0deg); }
+      50% { transform: translate(-10px, -10px) rotate(-8deg); }
+    }
+    @keyframes float-c {
+      0%, 100% { transform: translate(0, 0) rotate(0deg); }
+      50% { transform: translate(8px, 10px) rotate(14deg); }
+    }
+    @media (max-width: 900px) {
+      .hero-deco-2, .hero-deco-4 { display: none; }
+    }
+    @media (max-width: 640px) {
+      .hero-deco-3, .hero-deco-5 { display: none; }
+    }
+
+    /* ══ Hero 搜尋框 ══ */
+    .hero-search {
+      position: relative;
+      max-width: 640px;
+      margin: 0 auto 20px;
+      z-index: 2;
+    }
+    .hero-search-input {
+      width: 100%;
+      padding: 22px 60px 22px 64px;
+      font-size: 1.06rem;
+      border: 2px solid var(--line);
+      border-radius: 16px;
+      background: #fff;
+      box-shadow: 0 16px 40px rgba(0,0,0,0.06), 0 4px 12px rgba(0,0,0,0.03);
+      outline: none;
+      transition: all 0.25s;
+      font-family: inherit;
+      color: var(--text);
+    }
+    .hero-search-input::placeholder { color: #b8babd; }
+    .hero-search-input:focus {
+      border-color: var(--orange);
+      box-shadow: 0 20px 48px rgba(255,163,0,0.22), 0 4px 12px rgba(255,163,0,0.08);
+      transform: translateY(-2px);
+    }
+    .hero-search-icon {
+      position: absolute;
+      left: 22px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--orange);
+      pointer-events: none;
+      display: flex;
+    }
+    .hero-search-clear {
+      position: absolute;
+      right: 22px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: var(--line-soft);
+      border: none;
+      border-radius: 50%;
+      width: 28px;
+      height: 28px;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      color: var(--text-mute);
+      transition: all 0.2s;
+      padding: 0;
+    }
+    .hero-search-clear:hover { background: var(--orange); color: #fff; }
+    .hero-search.has-text .hero-search-clear { display: flex; }
+
+    /* 熱門搜尋 chips */
+    .hero-search-hot {
+      display: flex;
+      gap: 8px;
+      justify-content: center;
+      flex-wrap: wrap;
+      align-items: center;
+      margin-bottom: 40px;
+      position: relative;
+      z-index: 2;
+    }
+    .hot-label {
+      font-size: 0.88rem;
+      color: var(--text-mute);
+      font-weight: 500;
+    }
+    .hot-chip {
+      padding: 7px 16px;
+      background: rgba(255,255,255,0.85);
+      border: 1.5px solid var(--line);
+      border-radius: 18px;
+      font-size: 0.88rem;
+      color: var(--text);
+      cursor: pointer;
+      transition: all 0.2s;
+      font-family: inherit;
+      font-weight: 500;
+      backdrop-filter: blur(4px);
+    }
+    .hot-chip:hover {
+      background: var(--orange-pale);
+      border-color: var(--orange);
+      color: var(--orange-dark);
+      transform: translateY(-1px);
+    }
+
     /* Hero stats bar — 升級版：大數字 + 卡片 hover + 分隔線 */
     .hero-stats {
       display: grid;
@@ -978,6 +1102,14 @@
 
   <!-- ══════════════════════════════════════ 1. Hero ══════════════════════════════════════ -->
   <section class="hero">
+    <!-- 6 個飄浮裝飾元素 -->
+    <svg class="hero-deco hero-deco-1" width="44" height="44" viewBox="0 0 24 24" fill="#FFA300" aria-hidden="true" style="opacity:0.22;"><path d="M12 2l2.39 7.36H22l-6.18 4.49L18.21 22 12 17.51 5.79 22l2.39-8.15L2 9.36h7.61z"/></svg>
+    <svg class="hero-deco hero-deco-2" width="56" height="56" viewBox="0 0 24 24" fill="#00C4B3" aria-hidden="true" style="opacity:0.16;"><circle cx="12" cy="12" r="10"/></svg>
+    <svg class="hero-deco hero-deco-3" width="38" height="38" viewBox="0 0 24 24" fill="#8B5CF6" aria-hidden="true" style="opacity:0.18;"><rect x="3" y="3" width="18" height="18" rx="5" transform="rotate(15 12 12)"/></svg>
+    <svg class="hero-deco hero-deco-4" width="46" height="46" viewBox="0 0 24 24" fill="none" stroke="#FFA300" stroke-width="2.5" aria-hidden="true" style="opacity:0.25;"><circle cx="12" cy="12" r="9"/></svg>
+    <svg class="hero-deco hero-deco-5" width="34" height="34" viewBox="0 0 24 24" fill="#FFD43B" aria-hidden="true" style="opacity:0.28;"><polygon points="12,3 22,21 2,21"/></svg>
+    <svg class="hero-deco hero-deco-6" width="60" height="20" viewBox="0 0 60 20" fill="none" stroke="#FF5859" stroke-width="2.5" stroke-linecap="round" aria-hidden="true" style="opacity:0.18;"><path d="M2 10 Q 12 0, 22 10 T 42 10 T 58 10"/></svg>
+
     <div class="container-narrow">
       <span class="hero-eyebrow">▸ FAQ · 常見問題</span>
       <h1 class="hero-title">
@@ -987,6 +1119,34 @@
         <strong>橘子蘋果程式學苑常見問題集</strong> — 從課程選擇、免費試聽、學費、補課、設備到升學幫助。<br>
         <strong>14 年程式教育經驗</strong>、<strong>近 3,000 位學生</strong>家長最常問的問題完整解答。
       </p>
+
+      <!-- 搜尋框 -->
+      <div class="hero-search" id="hero-search-wrap">
+        <span class="hero-search-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="11" r="8"/>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+          </svg>
+        </span>
+        <input type="text" class="hero-search-input" id="faq-search" placeholder="輸入關鍵字、秒找答案..." aria-label="搜尋 FAQ" autocomplete="off">
+        <button type="button" class="hero-search-clear" id="faq-search-clear" aria-label="清除">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="18" y1="6" x2="6" y2="18"/>
+            <line x1="6" y1="6" x2="18" y2="18"/>
+          </svg>
+        </button>
+      </div>
+
+      <!-- 熱門搜尋 chips -->
+      <div class="hero-search-hot">
+        <span class="hot-label">🔥 熱門：</span>
+        <button class="hot-chip" data-hot="試聽">試聽</button>
+        <button class="hot-chip" data-hot="學費">學費</button>
+        <button class="hot-chip" data-hot="補課">補課</button>
+        <button class="hot-chip" data-hot="設備">設備</button>
+        <button class="hot-chip" data-hot="線上">線上</button>
+        <button class="hot-chip" data-hot="升學">升學</button>
+      </div>
 
       <!-- Stats bar -->
       <div class="hero-stats">
@@ -1282,41 +1442,96 @@
       '</div>';
     }).join('');
 
-    // 3. 分類 filter
+    // 3. 共用 filter — 分類 + 搜尋 兩者疊加生效
     const chips = document.querySelectorAll('.faq-chip');
+    const searchInput = document.getElementById('faq-search');
+    const searchClear = document.getElementById('faq-search-clear');
+    const searchWrap = document.getElementById('hero-search-wrap');
+
+    function getCurrentCat() {
+      const active = document.querySelector('.faq-chip.active');
+      return active ? active.dataset.cat : 'all';
+    }
+    function getCurrentQuery() {
+      return (searchInput?.value || '').trim().toLowerCase();
+    }
+
+    function applyFilters() {
+      const cat = getCurrentCat();
+      const query = getCurrentQuery();
+      const allItems = container.querySelectorAll('.faq-item');
+
+      allItems.forEach(function (item) {
+        const text = (
+          item.querySelector('.faq-q-text')?.textContent + ' ' +
+          item.querySelector('.faq-a-inner')?.textContent
+        ).toLowerCase();
+        const catMatch = cat === 'all' || item.dataset.cat === cat;
+        const queryMatch = !query || text.includes(query);
+
+        if (catMatch && queryMatch) {
+          item.classList.remove('hidden');
+          // 搜尋時自動展開 match 的題目
+          if (query) item.classList.add('open');
+        } else {
+          item.classList.add('hidden');
+        }
+      });
+
+      // 搜尋框 has-text 狀態（控制 clear 按鈕顯示）
+      if (query) searchWrap?.classList.add('has-text');
+      else searchWrap?.classList.remove('has-text');
+    }
+
+    // 分類 chips
     chips.forEach(function (chip) {
       chip.addEventListener('click', function () {
-        const cat = chip.dataset.cat;
         chips.forEach(function (c) {
           c.classList.remove('active');
           c.setAttribute('aria-selected', 'false');
         });
         chip.classList.add('active');
         chip.setAttribute('aria-selected', 'true');
-
-        const allItems = container.querySelectorAll('.faq-item');
-        allItems.forEach(function (item) {
-          if (cat === 'all' || item.dataset.cat === cat) {
-            item.classList.remove('hidden');
-          } else {
-            item.classList.add('hidden');
-          }
-        });
+        applyFilters();
       });
     });
 
-    // 4. Quick Answers 跳轉時自動展開對應 FAQ
+    // 4. 搜尋框 input
+    searchInput?.addEventListener('input', applyFilters);
+    searchClear?.addEventListener('click', function () {
+      searchInput.value = '';
+      applyFilters();
+      searchInput.focus();
+    });
+
+    // 5. 熱門關鍵字 chips
+    document.querySelectorAll('.hot-chip').forEach(function (chip) {
+      chip.addEventListener('click', function () {
+        const hot = chip.dataset.hot;
+        if (searchInput) {
+          searchInput.value = hot;
+          applyFilters();
+          // 平滑捲到 FAQ
+          document.getElementById('faq')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    });
+
+    // 6. Quick Answers 跳轉時自動展開對應 FAQ
     document.querySelectorAll('.quick-card[href^="#q-"]').forEach(function (link) {
       link.addEventListener('click', function (e) {
         const targetId = link.getAttribute('href').slice(1);
         const target = document.getElementById(targetId);
         if (target) {
-          // 確保展開
           if (!target.classList.contains('open')) {
             target.classList.add('open');
           }
-          // 確保不在被 filter 隱藏狀態
-          chips[0].click();  // 點「全部」chip
+          // 清掉搜尋 + 分類回全部
+          if (searchInput) { searchInput.value = ''; }
+          chips.forEach(function (c) { c.classList.remove('active'); c.setAttribute('aria-selected', 'false'); });
+          chips[0]?.classList.add('active');
+          chips[0]?.setAttribute('aria-selected', 'true');
+          applyFilters();
         }
       });
     });
