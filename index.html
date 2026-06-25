@@ -993,7 +993,39 @@
       margin-top: 40px;
     }
     @media (max-width: 900px) { .courses-grid { grid-template-columns: repeat(2, 1fr); } }
-    @media (max-width: 560px) { .courses-grid { grid-template-columns: 1fr; } }
+    @media (max-width: 560px) {
+      .courses-grid {
+        display: flex;
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        gap: 14px;
+        margin-left: -20px;
+        margin-right: -20px;
+        padding: 0 20px 12px;
+        scroll-padding-left: 20px;
+        -webkit-overflow-scrolling: touch;
+      }
+      .courses-grid::-webkit-scrollbar { display: none; }
+      .courses-grid { scrollbar-width: none; }
+      .courses-grid > .course-card {
+        flex: 0 0 85%;
+        min-width: 280px;
+        max-width: 340px;
+        scroll-snap-align: start;
+      }
+    }
+    /* 滑動提示 — 出現在右側、暗示可向左滑 */
+    .courses-swipe-hint {
+      display: none;
+      text-align: center;
+      color: var(--text-mute);
+      font-size: 0.86rem;
+      margin-top: 8px;
+    }
+    @media (max-width: 560px) {
+      .courses-swipe-hint { display: block; }
+    }
 
     .course-card {
       background: #fff;
@@ -1492,6 +1524,7 @@
           <div class="course-arrow">了解更多 →</div>
         </a>
       </div>
+      <p class="courses-swipe-hint">← 左右滑動查看全部 9 大課程 →</p>
     </div>
   </section>
 
