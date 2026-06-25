@@ -319,35 +319,37 @@
 
     /* ══════════════════════════════════════ 1. Hero ══════════════════════════════════════ */
     .hero {
-      padding: 96px 0 64px;
+      padding: 112px 0 80px;
       background:
-        radial-gradient(ellipse at top left, rgba(255,163,0,0.08) 0%, transparent 50%),
-        radial-gradient(ellipse at top right, rgba(0,196,179,0.06) 0%, transparent 50%),
+        /* 底紋：橘色微點 grid */
+        radial-gradient(circle, rgba(255,163,0,0.10) 1px, transparent 1.5px),
+        /* 視覺氛圍漸層 */
+        radial-gradient(ellipse at top left, rgba(255,163,0,0.06) 0%, transparent 55%),
+        radial-gradient(ellipse at top right, rgba(0,196,179,0.05) 0%, transparent 55%),
         linear-gradient(180deg, #FFFBF5 0%, #fff 100%);
+      background-size: 24px 24px, auto, auto, auto;
       position: relative;
       text-align: center;
       overflow: hidden;
     }
-    @media (max-width: 768px) { .hero { padding: 64px 0 48px; } }
-
-    /* Hero illustration (右上角裝飾，桌機顯示、手機隱藏) */
-    .hero-illust {
+    /* Hero 頂部與底部柔化漸層 */
+    .hero::before {
+      content: '';
       position: absolute;
-      top: 40px;
-      right: 5%;
-      width: 240px;
-      height: 240px;
+      top: 0; left: 0; right: 0;
+      height: 120px;
+      background: linear-gradient(180deg, rgba(255,251,245,1) 0%, transparent 100%);
       pointer-events: none;
-      opacity: 0.95;
-      animation: float 4s ease-in-out infinite;
     }
-    .hero-illust img { width: 100%; height: 100%; object-fit: contain; }
-    @keyframes float {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-8px); }
+    .hero::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 80px;
+      background: linear-gradient(180deg, transparent 0%, #fff 100%);
+      pointer-events: none;
     }
-    @media (max-width: 1100px) { .hero-illust { width: 180px; height: 180px; right: 2%; } }
-    @media (max-width: 900px) { .hero-illust { display: none; } }
+    @media (max-width: 768px) { .hero { padding: 72px 0 56px; } }
 
     .hero-eyebrow {
       display: inline-flex;
@@ -366,64 +368,85 @@
     }
 
     .hero-title {
-      font-size: clamp(2.2rem, 5.5vw, 3.6rem);
+      font-size: clamp(2.4rem, 6vw, 4.2rem);
       font-weight: 900;
       color: var(--text);
-      letter-spacing: -1.5px;
-      margin: 0 0 24px;
-      line-height: 1.2;
+      letter-spacing: -2px;
+      margin: 0 0 28px;
+      line-height: 1.15;
+      position: relative;
+      z-index: 1;
     }
     .hero-title .accent {
       color: var(--orange);
       position: relative;
       display: inline-block;
-    }
-    .hero-title .accent::after {
-      content: '';
-      position: absolute;
-      left: 0; right: 0; bottom: -6px;
-      height: 10px;
-      background: rgba(255,163,0,0.18);
-      z-index: -1;
-      border-radius: 4px;
+      background: linear-gradient(180deg,
+        transparent 0 65%,
+        rgba(255,163,0,0.22) 65% 92%,
+        transparent 92%);
+      padding: 0 4px;
     }
 
     .hero-desc {
-      font-size: 1.12rem;
+      font-size: 1.16rem;
       color: var(--gray);
-      max-width: 720px;
-      margin: 0 auto 40px;
-      line-height: 1.8;
+      max-width: 740px;
+      margin: 0 auto 48px;
+      line-height: 1.85;
+      position: relative;
+      z-index: 1;
     }
     .hero-desc strong { color: var(--text); font-weight: 700; }
 
-    /* Hero stats bar */
+    /* Hero stats bar — 升級版：大數字 + 卡片 hover + 分隔線 */
     .hero-stats {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
-      gap: 16px;
-      max-width: 840px;
-      margin: 0 auto 40px;
-      padding: 28px 24px;
+      gap: 0;
+      max-width: 880px;
+      margin: 0 auto 48px;
+      padding: 36px 32px;
       background: #fff;
-      border-radius: 18px;
-      box-shadow: var(--shadow-md);
+      border-radius: 20px;
+      box-shadow: 0 24px 48px rgba(255,163,0,0.10), 0 4px 16px rgba(0,0,0,0.04);
+      position: relative;
+      z-index: 1;
+      border: 1px solid rgba(255,163,0,0.08);
     }
     @media (max-width: 640px) {
-      .hero-stats { grid-template-columns: repeat(2, 1fr); padding: 22px 18px; gap: 14px; }
+      .hero-stats { grid-template-columns: repeat(2, 1fr); padding: 28px 20px; }
     }
-    .hero-stat { text-align: center; }
+    .hero-stat {
+      text-align: center;
+      padding: 0 16px;
+      border-right: 1px solid var(--line-soft);
+      transition: transform 0.2s;
+    }
+    .hero-stat:last-child { border-right: none; }
+    .hero-stat:hover { transform: translateY(-3px); }
+    @media (max-width: 640px) {
+      .hero-stat { padding: 10px 8px; border-right: none; border-bottom: 1px solid var(--line-soft); }
+      .hero-stat:nth-child(odd) { border-right: 1px solid var(--line-soft); }
+      .hero-stat:nth-last-child(-n+2) { border-bottom: none; }
+    }
     .hero-stat-num {
-      font-size: clamp(1.5rem, 3vw, 2rem);
+      font-size: clamp(1.8rem, 3.6vw, 2.6rem);
       font-weight: 900;
       color: var(--orange);
-      line-height: 1.1;
-      margin-bottom: 4px;
+      line-height: 1.05;
+      margin-bottom: 6px;
+      letter-spacing: -1px;
+      background: linear-gradient(135deg, var(--orange) 0%, #FF6B00 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
     }
     .hero-stat-label {
-      font-size: 0.84rem;
+      font-size: 0.86rem;
       color: var(--text-mute);
       letter-spacing: 0.5px;
+      font-weight: 500;
     }
 
     .hero-cta-row {
@@ -955,9 +978,6 @@
 
   <!-- ══════════════════════════════════════ 1. Hero ══════════════════════════════════════ -->
   <section class="hero">
-    <div class="hero-illust" aria-hidden="true">
-      <img src="assets/faq-hero-illust.png" alt="家長與孩子共同探索程式學習的疑問" loading="eager">
-    </div>
     <div class="container-narrow">
       <span class="hero-eyebrow">▸ FAQ · 常見問題</span>
       <h1 class="hero-title">
